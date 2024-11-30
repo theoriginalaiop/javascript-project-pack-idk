@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Editor</title>
+  <!-- CodeMirror Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+    #editor {
+      border: 1px solid #ddd;
+      width: 90%;
+      max-width: 800px;
+      height: 400px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Online Code Editor</h1>
+  <textarea id="editor">// Write your code here...</textarea>
+  <button id="runButton">Run Code</button>
+  <iframe id="output" style="width:90%; max-width:800px; height:300px; border:1px solid #ddd; margin-top:10px;"></iframe>
+
+  <!-- CodeMirror Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+  <!-- Add JavaScript Mode -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/javascript/javascript.min.js"></script>
+  <script>
+    // Initialize CodeMirror
+    const editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+      lineNumbers: true,
+      mode: "javascript",
+      theme: "default"
+    });
+
+    // Run Code Button
+    document.getElementById("runButton").addEventListener("click", () => {
+      const code = editor.getValue();
+      const outputFrame = document.getElementById("output");
+      outputFrame.contentDocument.body.innerHTML = `<script>${code}<\/script>`;
+    });
+  </script>
+</body>
+</html>
